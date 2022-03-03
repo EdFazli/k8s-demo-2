@@ -25,6 +25,22 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 3000
+        env:
+        - name: USER_NAME  # env var name
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-user
+        - name: USER_PWD  # env var pwd
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-password
+        - name: DB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config
+              key: mongo-url
 
 ---
 
